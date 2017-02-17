@@ -79,3 +79,9 @@ nelmio_cors:
         max_age:        3600
     paths:
         '^/': ~
+
+api_platform:
+    http_cache:
+        enable_tags: true
+        varnish_urls: %varnish_urls%
+        shared_max_age: 3600

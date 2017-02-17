@@ -16,6 +16,10 @@ $loader->unregister();
 $apcLoader->register(true);
 */
 
+if ('varnish' !== $proxyIp = gethostbyname('varnish')) {
+    Request::setTrustedProxies([$proxyIp]);
+}
+
 $kernel = new AppKernel('prod', false);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);

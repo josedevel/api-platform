@@ -14,8 +14,6 @@ services:
     image: nginx:1.11-alpine
     depends_on:
       - php
-    ports:
-      - "80:80"
     volumes:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./web:/srv/api-platform/web
@@ -33,6 +31,14 @@ services:
       - ./var:/srv/api-platform/var
       - ./vendor:/srv/api-platform/vendor
       - ./web:/srv/api-platform/web
+  varnish:
+      build: docker/varnish
+      depends_on:
+        - nginx
+      volumes:
+        - ./docker/varnish/conf:/etc/varnish:ro
+      ports:
+        - "80:80"
 
 volumes:
   db-data: {}
